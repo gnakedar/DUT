@@ -1,0 +1,123 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="row">
+        <div class="col-lg-3 listview">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>My Test Suites</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Platform</h4>
+                    <select style="width:227px">
+                        <option value="Raspberry Pi 3">Raspberry Pi 3</option>
+                        <option value="VRX200">VRX200</option>
+                        <option value="GRX350">GRX350</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Test Suites</h4>
+                    <button data-toggle="collapse" data-target="#lan" class="col-lg-12 col-md-6 listviewcategory ">LAN <i style="float: right;" class="glyphicon glyphicon-chevron-right"></i></button>
+                    <button data-toggle="collapse" data-target="#wan" class="col-lg-12 col-md-6 listviewcategory">WAN <i style="float: right;" class="glyphicon glyphicon-chevron-right"></i></button>
+                    <button data-toggle="collapse" data-target="#wlan" class="col-lg-12 col-md-6 listviewcategory">WLAN <i style="float: right;" class="glyphicon glyphicon-chevron-right"></i></button>
+                    <button data-toggle="collapse" data-target="#system" class="col-lg-12 col-md-6 listviewcategory">System <i style="float: right;" class="glyphicon glyphicon-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+
+        <form method="post" action="/dashboard/testcase">
+            {% csrf_token %}
+          <div id="lan" class="col-lg-12">
+              <h2>LAN</h2>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>ShowInterfaces</h3>
+                    <input type="checkbox" class="form-check-input" name="lan_showinterfaces" id="lan_showinterfaces"><label>Displays all the interfaces available.</label>
+            </div>
+            <div class="listview col-lg-5">
+                    <h3>AddStaticRoute</h3>
+                <input type="checkbox" class="form-check-input" id="lan_addstationroute"><label>Adds a static route.</label>
+            </div>
+            </div>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>ListRoutes</h3>
+                <input type="checkbox" class="form-check-input" id="lan_listroutes"><label>Lists all the routes available.</label>
+            </div>
+            <div class="listview col-lg-5">
+                    <h3>Change Subnet</h3>
+                <input type="checkbox" class="form-check-input" id="lan_changesubnet"><label>Changes Subnet of LAN.</label>
+            </div>
+            </div>
+              <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>List LAN Interfaces</h3>
+                <input type="checkbox" class="form-check-input" id="lan_listlaninterfaces"><label>Lists LAN Interfaces.</label>
+            </div>
+            <div class="listview col-lg-5">
+                    <h3>Verifyeth0</h3>
+                <input type="checkbox" class="form-check-input" id="lan_verifyeth0"><label>Displays eth0 interface.</label>
+            </div>
+            </div>
+
+        </div>
+         <div id="wan" class="collapse col-lg-12">
+              <h2>WAN</h2>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>ShowWANInterfaces</h3>
+                <input type="checkbox" class="form-check-input" name="wan_showwaninterfaces" id="lan_showwaninterfaces"><label>Displays all the interfaces available.</label>
+            </div>
+            </div>
+         </div>
+        <div id="wlan" class="collapse col-lg-12">
+              <h2>WLAN</h2>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>Setup Open AP</h3>
+                <input type="checkbox" class="form-check-input" id="lan_setupopenap"><label>Creates AP in open security mode.</label>
+            </div>
+            <div class="listview col-lg-5">
+                    <h3>Setup Open Station</h3>
+                <input type="checkbox" class="form-check-input" id="lan_setupopenstation"><label>Creates station in Open security mode.</label>
+            </div>
+            </div>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>Setup WPA2-PSK AP</h3>
+                <input type="checkbox" class="form-check-input" id="lan_setupwpa2_pskap"><label>Creates AP in WPA2-PSK security mode.</label>
+            </div>
+            <div class="listview col-lg-5">
+                    <h3>Setup WPA2-PSK Station</h3>
+                <input type="checkbox" class="form-check-input" id="lan_setupwpa2_pskstation"><label>Creates station in WPA2-PSK security mode.</label>
+            </div>
+            </div>
+        </div>
+        <div id="system" class="collapse col-lg-12">
+              <h2>SYSTEM</h2>
+            <div class="row">
+            <div class="listview col-lg-5">
+                    <h3>System Info</h3>
+                <input type="checkbox" class="form-check-input" id="lan_system_info"><label>Disaplays System Info.</label>
+            </div>
+            </div>
+         </div>
+        <div class="row">
+
+                <button type="submit" class="btn btn-primary">Run Selected Testcase</button>
+                <button type="submit" class="btn btn-primary">Schedule Testcase</button>
+
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock%}

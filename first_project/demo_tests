@@ -1,0 +1,7 @@
+LAN_showInterfaces.showInterfaces showAllInterfaces
+LAN_Verifyeth0.verifyEth0 VerifyEth0
+LAN_AddStaticRoute.addStaticRoute AddStaticRoute
+Sys_info.systemInfo SystemInfo
+LAN_ListRoute.listRoutes ListRoutes
+WLAN_AP.ap_start StartAP
+WLAN_Station.station_start StartStation
