@@ -1,0 +1,271 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<!--Admin part Start-->
+{% if request.user.is_superuser %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-4"><p>Platform</p>
+            <div class="nav" id="platform">
+                <button class="nav-item nav-link" data-toggle="tab" href="#add_platform">Add</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#modify_platform">Modify</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#delete_platform">Delete</button>
+            </div>
+        </div>
+        <div class="col-lg-4"><p>DUT-Category</p>
+            <div class="nav" id="dut_category">
+                <button class="nav-item nav-link" data-toggle="tab" href="#add_dut_category">Add</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#modify_dut_category">Modify</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#delete_dut_category">Delete</button>
+            </div>
+        </div>
+        <div class="col-lg-4"><p>Test-Cases</p>
+            <div class="nav" id="test_cases">
+                <button class="nav-item nav-link" data-toggle="tab" href="#add_test_cases">Add</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#modify_test_cases">Modify</button>
+                <button class="nav-item nav-link" data-toggle="tab" href="#delete_test_cases">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+<hr>
+</div>
+
+<div class="row">
+    <div id="admin_changes" class="col-lg-12">
+            <div class="tab-content">
+                <div class="tab-pane" id="add_platform">
+                    <form method="post" action="/dashboard/testcase">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-5">
+                                <label>Please Enter platform name</label><br>
+                                    <input type="text" name="dut_name" id="platform_name">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                        </div>
+                        <div class="row"><br>
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary">ADD platform</button>
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+
+                        </div>
+                        <!--<label>Please Enter platform name</label>-->
+                        <!--<input type="text" name="platform_name" id="platform_name">-->
+                    </form>
+                </div>
+                <div class="tab-pane" id="modify_platform"> modify</div>
+                <div class="tab-pane" id="delete_platform"> delete</div>
+
+                <div class="tab-pane" id="add_dut_category">
+                    <form method="post" action="/dashboard/testcase">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-5">
+                            {% if platform_list %}
+                                <select style="width:227px">
+                                    {% for plaform in platform_list %}
+                                          <option value="{{ plaform.platform_name }}">{{ plaform.platform_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <span>No platform</span>
+                            {% endif %}
+                            </div>
+                            <div class="col-lg-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-5">
+                                <label>Please Enter DUT name</label><br>
+                                    <input type="text" name="dut_name" id="dut_name">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                        </div>
+                        <div class="row"><br>
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary">ADD DUT-Category</button>
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="modify_dut_category">DUT modify</div>
+                <div class="tab-pane" id="delete_dut_category">DUT delete</div>
+
+                <div class="tab-pane" id="add_test_cases">
+                    <form method="post" action="/dashboard/testcase">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-5">
+                            {% if platform_list %}
+                                <select style="width:227px">
+                                    {% for plaform in platform_list %}
+                                          <option value="{{ plaform.platform_name }}">{{ plaform.platform_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <span>No platform</span>
+                            {% endif %}
+                                <br>
+                                {% if dut_category_list %}
+                                <select style="width:227px">
+                                    {% for dut_category in dut_category_list %}
+                                        <option value="{{ dut_category.category }}">{{ dut_category.category }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% else %}
+                                <span>No DUT Category</span>
+                                {%endif%}
+
+
+                            </div>
+                            <div class="col-lg-3"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-5">
+                                <label>Please Enter module path</label><br>
+                                    <input type="text" name="module_path" id="module_path"><br>
+                                <label>Please Enter Class name</label><br>
+                                    <input type="text" name="class_name" id="class_name">
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                        </div>
+                        <div class="row"><br>
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary">ADD Test-Cases </button>
+                                <button type="submit" class="btn btn-primary">Reset</button>
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="modify_test_cases">test_cases modify</div>
+                <div class="tab-pane" id="delete_test_cases">test_cases delete</div>
+            </div>
+    </div>
+</div>
+
+<div class="row">
+    <hr>
+</div>
+{% endif %}
+<!--Admin part End-->
+
+<div class="row">
+        <div class="col-lg-3 listview">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>My Test Suites</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Platform</h4>
+
+                    {% if platform_list %}
+                        <select style="width:227px">
+                            {% for plaform in platform_list %}
+                                  <option value="{{ plaform.platform_name }}">{{ plaform.platform_name }}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                    <span>No platform</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4>Test Suites</h4>
+                    {% if dut_category_list %}
+                        {% for dut_category in dut_category_list %}
+                            <button data-toggle="collapse" data-target="#{{dut_category.category}}" class="col-lg-12 col-md-6 listviewcategory ">{{dut_category.category}} <i style="float: right;" class="glyphicon glyphicon-chevron-right"></i></button>
+                        {%endfor%}
+                    {% else %}
+                    <span>No DUT Category</span>
+                    {%endif%}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+
+        <form method="post" action="/dashboard/testcase">
+            {% csrf_token %}
+
+            {% if dut_category_list %}
+                {% for dut_category in dut_category_list %}
+                    <div id="{{dut_category.category}}" class="collapse col-lg-12">
+                      <h3>{{dut_category.category}}</h3>
+                        {% if testSuite_list %}
+                            {% for testSuite in testSuite_list%}
+                            {%if testSuite.category_id == dut_category.id %}
+                                <div class="listview col-lg-5">
+                                    <b>{{testSuite.testcasetitle}} </b><br>
+                                    <input type="checkbox" class="form-check-input" name="wan_showwaninterfaces" id="lan_showwaninterfaces">
+                                    <span>{{testSuite.description}}</span>
+                                </div>
+                                
+                                <!-- {% if forloop.counter0|divisibleby:2 %}
+                                <div class="row">
+                                <div class="listview col-lg-5">
+                                    <h3>{{testSuite.testcasetitle}} </h3>
+                                    <input type="checkbox" class="form-check-input" name="wan_showwaninterfaces" id="lan_showwaninterfaces">
+                                    <label>{{testSuite.description}}</label>
+                                </div>
+                                </div>
+                                {%else%}
+                                <div class="listview col-lg-5">
+                                    <h3>{{testSuite.testcasetitle}} </h3>
+                                    <input type="checkbox" class="form-check-input" name="wan_showwaninterfaces" id="lan_showwaninterfaces">
+                                    <label>{{testSuite.description}}</label>
+                                </div>
+                                {%endif%} -->
+
+                            {% else %}
+                                <!-- <span>No Record Found</span>                         -->
+                            {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <span>No Record Found</span>
+                        {% endif%}
+
+                    </div>
+                {%endfor%}
+            {%endif%}
+        <div class="row">
+                <button type="submit" class="btn btn-primary">Run Selected Testcase</button>
+                <button type="submit" class="btn btn-primary">Schedule Testcase</button>
+
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock%}

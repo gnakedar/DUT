@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Login{% endblock %}</title>
+  {% load staticfiles %}
+  {% load bootstrap3 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% bootstrap_messages %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+</head>
+<body>
+  <div class="container">
+      <div class="row ">
+        <div class="col-lg-12 col-md-12">
+            <div class="col-lg-4 col-md-4">
+                <img src="{% static 'img/logo.jpg' %}" height="100" width="100" alt="My image"/>
+                <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}" />
+            </div>
+            <div class="col-lg-8 col-md-8">
+                {% if user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                        <h2>Logged in as Admin</h2>
+                    {% else %}
+                        <h2>Logged in as Tester</h2>
+                    {% endif %}
+                <h3><a href="{% url 'logout' %}" style="float:right;">logout </a></h3>
+                {% else %}
+                <!--<img src="/scratch/django_project/first_project/static/img/logo.jpg" alt="No1 Image for logo" >
+                <img src="{% static '/img/logo.jpg' %}" alt="No1 Image for logo" >-->
+                <h3><a href="{% url 'login' %}" style="float:right;">login</a></h3>
+                {% endif %}
+            </div>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-lg-12 col-md-12"><hr></div>
+      </div>
+       <main>
+          {% block content %}
+          {% endblock %}
+        </main>
+      <div class="row ">
+        <div class="col-lg-12 col-md-12">
+            <hr>
+            <footer>
+              <a href="https://mirafra.com">mirafra.com</a>
+            </footer>
+        </div>
+      </div>
+
+  </div>
+</body>
+</html>
